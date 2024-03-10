@@ -1,4 +1,4 @@
-## function for computing penalty (path length) for inserting items from different clusters into a given cluster
+## Cluster Breach Score function for computing penalty (path length) for inserting items from different clusters into a given cluster
 cbs <- function(D, path, clustm){ # dist. matrix, ordering, cluster membership vector
   if (length(path)!=length(clustm)) return(NaN)
   if (length(path)!=dim(D)[1]) return(NaN)
