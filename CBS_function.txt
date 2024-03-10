@@ -1,0 +1,31 @@
+## function for computing penalty (path length) for inserting items from different clusters into a given cluster
+cbs <- function(D, path, clustm){ # dist. matrix, ordering, cluster membership vector
+  if (length(path)!=length(clustm)) return(NaN)
+  if (length(path)!=dim(D)[1]) return(NaN)
+  clustm <- clustm[path] # reordered clustm
+  p <- 0 # initializing penalty
+  for(i in 1:max(unique(clustm))) { #i=cluster membership
+    ind <-which(clustm==i) # clustm indices of objects in the cluster i
+    nclust <- length(ind) # cluster size
+    subpath <- path[min(ind):max(ind)] # smallest part of the path containing cluster i
+    subclustm <- clustm[min(ind):max(ind)] # smallest part of clustm containing all i's
+    n <- length(subclustm)
+    nforeignyet <- n-nclust # number of foreign points in the subpath not visited yet
+    nforeignalready <- 0 # number of foreign points in the subpath already visited
+    nclustalready <-0  # number of points in the cluster already visited
+    nclustyet <- nclust  # number of points in the cluster not visited yet
+    for(j in 2:n){ #
+      if(subclustm[j-1]==i & subclustm[j] !=i) {
+        k <-which(subclustm[j:n]==i)[1]+j-1 # next first point in subpath from the cluster
+        nclustalready <- j-1-nforeignalready
+        nclustyet <- nclust-nclustalready
+        nforeignalready <- nforeignalready+length(j:(k-1))
+        nforeignyet <- nforeignyet-nforeignalready # number of foreign points left in subpath
+        p <-  p +(min(nclustalready,nclustyet,length(j:(k-1))))*(mean(c(D[subpath[j-1],subpath[j:(k-1)]],D[subpath[k],subpath[j:(k-1)]])))
+        
+      }
+    }
+    
+  }
+  return(p)
+}
