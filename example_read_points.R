@@ -30,6 +30,7 @@ penaltymatrix <-function(d,method){
       e12 <- c(a1[j,])     # vector of cluster indices for point j
       lca1 <- max(which(e11==e12))  # least common ancestor node of i and j
       PM[i,j] <- h1[lca1]
+      PM[j,i] <- PM[i,j]
     }
   }
   NM <- PM * mean(D) / mean(PM)           # normalized penalty matrix
