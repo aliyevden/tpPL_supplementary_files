@@ -1,4 +1,4 @@
-The article "Seriation using tree-penalized path length" by Aliyev & Zirbel, 2021, introduces a family of new, hybrid, seriation methods which utilize the strengths of two
+The article "Seriation using tree-penalized path length" by Aliyev & Zirbel, 2023, introduces a family of new, hybrid, seriation methods which utilize the strengths of two
 well-known objectives, Path Length (TSP), and OLO (Optimal Leaf Order, a dendrogram seriation method by Bar-Joseph et al. 2001).
 The main idea is to add to the distance matrix a penalty which measures the number and severity of deviations from the tree structure; this provides a balance between short path length and fidelity to the tree.
 The new objective function is called tpPL, which stands for "tree-penalized path length".
